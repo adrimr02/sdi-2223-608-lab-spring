@@ -2,23 +2,23 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head th:replace="fragments/head"></head>
 <body>
-<nav th:replace="fragments/nav"></nav>
-<div class="container" id="main-container">
+  <nav th:replace="fragments/nav"></nav>
+  <div class="container" id="main-container">
     <h2>Detalles de la nota</h2>
     <div class="card">
-        <div class="card-header">Descripción</div>
-        <div class="card-body">
-            <p class="card-text" th:text="${mark.description}">Ejercicio 1</p>
-        </div>
+      <div class="card-header">Descripción</div>
+      <div class="card-body">
+        <p class="card-text" th:text="${mark.description}">Ejercicio 1</p>
+      </div>
     </div>
     <br>
     <div class="card">
-        <div class="card-header">Puntuación</div>
-        <div class="card-body">
-            <p class="card-text" th:text="${mark.score}">100</p>
-        </div>
+      <div class="card-header">Puntuación</div>
+      <div class="card-body">
+        <p class="card-text" th:text="${mark.score}">100</p>
+      </div>
     </div>
-</div>
-<footer th:replace="fragments/footer"></footer>
+  </div>
+  <footer th:replace="fragments/footer"></footer>
 </body>
 </html>
