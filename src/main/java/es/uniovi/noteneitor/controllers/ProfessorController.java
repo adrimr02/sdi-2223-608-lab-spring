@@ -42,4 +42,16 @@ public class ProfessorController {
         return "redirect:/professor/list";
     }
 
+    @RequestMapping("professor/edit/{dni}")
+    public String updateProfessorView(Model model, @PathVariable String dni) {
+        model.addAttribute("professor", professorService.getProfessor(dni));
+        return "professor/edit";
+    }
+
+    @RequestMapping(value = "/professor/edit", method = RequestMethod.POST)
+    public String updateProfessor(@ModelAttribute Professor professor) {
+        professorService.addProfessor(professor);
+        return "redirect:/professor/list";
+    }
+
 }
