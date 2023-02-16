@@ -1,7 +1,12 @@
 package es.uniovi.noteneitor.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Professor {
 
+    @Id
     private String dni;
 
     private String name;
