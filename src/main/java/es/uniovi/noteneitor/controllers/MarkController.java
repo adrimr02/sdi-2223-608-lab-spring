@@ -1,7 +1,7 @@
 package es.uniovi.noteneitor.controllers;
 
 import es.uniovi.noteneitor.entities.Mark;
-import es.uniovi.noteneitor.services.MarksService;
+import es.uniovi.noteneitor.services.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class MarkController {
 
     @Autowired
-    private MarksService marksService;
+    private MarkService marksService;
 
     @RequestMapping("/mark/list")
     public String getList(Model model) {
