@@ -1,6 +1,6 @@
 package es.uniovi.noteneitor.entities;
 
-public class Teacher {
+public class Professor {
 
     private String dni;
 
@@ -10,9 +10,9 @@ public class Teacher {
 
     private String category;
 
-    public Teacher() {}
+    public Professor() {}
 
-    public Teacher(String dni, String name, String lastname, String category) {
+    public Professor(String dni, String name, String lastname, String category) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
@@ -53,7 +53,7 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher{" +
+        return "Professor{" +
                 "dni='" + dni + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
