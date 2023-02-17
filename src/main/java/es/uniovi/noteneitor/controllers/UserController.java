@@ -1,8 +1,11 @@
 package es.uniovi.noteneitor.controllers;
 
 import es.uniovi.noteneitor.entities.User;
+import es.uniovi.noteneitor.services.SecurityService;
 import es.uniovi.noteneitor.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +18,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SecurityService securityService;
 
     @RequestMapping("/user/list")
     public String getListado(Model model) {
@@ -58,5 +64,28 @@ public class UserController {
         userService.addUser(user);
         return "redirect:/user/details/" + id;
     }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signup(@ModelAttribute("user") User user, Model model) {
+        userService.addUser(user);
+        securityService.autoLogin(user.getDni(), user.getRepeatPassword());
+        return "redirect:home";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+    public String home(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String dni = auth.getName();
+        User activeUser = userService.getUserByDni(dni);
+        model.addAttribute("markList", activeUser.getMarks());
+        return "home";
+    }
+
+
 
 }

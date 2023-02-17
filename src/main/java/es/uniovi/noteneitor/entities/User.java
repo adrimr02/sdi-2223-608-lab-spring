@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
@@ -16,6 +17,12 @@ public class User {
     private String dni;
     private String name;
     private String lastname;
+
+    private String password;
+
+    @Transient
+    private String repeatPassword;
+
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -76,6 +83,22 @@ public class User {
 
     public void setMarks(Set<Mark> marks) {
         this.marks = marks;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 
     public String getFullName() {
