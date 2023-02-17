@@ -30,21 +30,21 @@ public class ProfessorController {
         return "redirect:/professor/list";
     }
 
-    @RequestMapping("/professor/details/{dni}")
-    public String getProfessor(Model model, @PathVariable String dni) {
-        model.addAttribute("professor", professorService.getProfessor(dni));
+    @RequestMapping("/professor/details/{id}")
+    public String getProfessor(Model model, @PathVariable long id) {
+        model.addAttribute("professor", professorService.getProfessor(id));
         return "professor/details";
     }
 
-    @RequestMapping( "/professor/delete/{dni}")
-    public String deleteProfessor(@PathVariable String dni) {
-        professorService.deleteProfessor(dni);
+    @RequestMapping( "/professor/delete/{id}")
+    public String deleteProfessor(@PathVariable long id) {
+        professorService.deleteProfessor(id);
         return "redirect:/professor/list";
     }
 
-    @RequestMapping("professor/edit/{dni}")
-    public String updateProfessorView(Model model, @PathVariable String dni) {
-        model.addAttribute("professor", professorService.getProfessor(dni));
+    @RequestMapping("professor/edit/{id}")
+    public String updateProfessorView(Model model, @PathVariable long id) {
+        model.addAttribute("professor", professorService.getProfessor(id));
         return "professor/edit";
     }
 

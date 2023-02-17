@@ -6,6 +6,7 @@
 <div class="container" id="main-container">
     <h2>Editar nota</h2>
     <form class="form-horizontal" method="post" action="/professor/edit" >
+        <input type="hidden" name="id" th:value="${professor.id}">
         <div class="form-group">
             <label class="control-label col-sm-2" for="dni">Dni:</label>
             <div class="col-sm-10">

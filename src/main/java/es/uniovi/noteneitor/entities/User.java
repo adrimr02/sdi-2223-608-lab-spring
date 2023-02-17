@@ -1,33 +1,33 @@
 package es.uniovi.noteneitor.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class Professor {
+public class User {
 
     @Id
     @GeneratedValue
     private long id;
 
-    @Column(unique = true)
+    @Column(unique=true)
     private String dni;
-
     private String name;
-
     private String lastname;
+    private String role;
 
-    private String category;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Mark> marks;
 
-    public Professor() {}
+    public User() {}
 
-    public Professor(String dni, String name, String lastname, String category) {
+    public User(String dni, String name, String lastname) {
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.category = category;
+        this.marks = new HashSet<>();
     }
 
     public long getId() {
@@ -62,21 +62,23 @@ public class Professor {
         this.lastname = lastname;
     }
 
-    public String getCategory() {
-        return category;
+    public String getRole() {
+        return role;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "Professor{" +
-                "dni='" + dni + '\'' +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", category='" + category + '\'' +
-                '}';
+    public Set<Mark> getMarks() {
+        return new HashSet<>( marks );
+    }
+
+    public void setMarks(Set<Mark> marks) {
+        this.marks = marks;
+    }
+
+    public String getFullName() {
+        return name + " " + lastname;
     }
 }

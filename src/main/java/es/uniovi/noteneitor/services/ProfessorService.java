@@ -21,15 +21,15 @@ public class ProfessorService {
         return professors;
     }
 
-    public Professor getProfessor(String dni) {
-        return professorRepository.findById(dni).get();
+    public Professor getProfessor(long id) {
+        return professorRepository.findById(id).get();
     }
 
     public void addProfessor(Professor professor) {
         professorRepository.save(professor);
     }
 
-    public void deleteProfessor(String dni) {
-        professorRepository.deleteById(dni);
+    public void deleteProfessor(long id) {
+        professorRepository.deleteById(id);
     }
 }
