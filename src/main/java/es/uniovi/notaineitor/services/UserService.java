@@ -1,17 +1,13 @@
-package es.uniovi.noteneitor.services;
+package es.uniovi.notaineitor.services;
 
-import es.uniovi.noteneitor.entities.Mark;
-import es.uniovi.noteneitor.entities.User;
-import es.uniovi.noteneitor.repositories.UserRepository;
-import jakarta.annotation.PostConstruct;
+import es.uniovi.notaineitor.entities.User;
+import es.uniovi.notaineitor.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserService {

@@ -1,8 +1,7 @@
-package es.uniovi.noteneitor.services;
+package es.uniovi.notaineitor.services;
 
-import es.uniovi.noteneitor.entities.Mark;
-import es.uniovi.noteneitor.entities.Professor;
-import es.uniovi.noteneitor.repositories.ProfessorRepository;
+import es.uniovi.notaineitor.entities.Professor;
+import es.uniovi.notaineitor.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

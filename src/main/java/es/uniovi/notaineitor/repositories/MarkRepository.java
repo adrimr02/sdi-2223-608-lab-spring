@@ -1,6 +1,6 @@
-package es.uniovi.noteneitor.repositories;
+package es.uniovi.notaineitor.repositories;
 
-import es.uniovi.noteneitor.entities.Mark;
+import es.uniovi.notaineitor.entities.Mark;
 import org.springframework.data.repository.CrudRepository;
 
 public interface MarkRepository extends CrudRepository<Mark, Long> {

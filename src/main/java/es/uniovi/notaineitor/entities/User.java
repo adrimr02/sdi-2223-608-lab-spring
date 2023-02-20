@@ -1,7 +1,7 @@
-package es.uniovi.noteneitor.entities;
+package es.uniovi.notaineitor.entities;
 
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 

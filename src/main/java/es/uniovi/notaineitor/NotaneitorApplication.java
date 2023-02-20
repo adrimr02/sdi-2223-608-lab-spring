@@ -1,4 +1,4 @@
-package es.uniovi.noteneitor;
+package es.uniovi.notaineitor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

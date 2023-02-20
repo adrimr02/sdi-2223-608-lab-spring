@@ -1,8 +1,8 @@
-package es.uniovi.noteneitor.controllers;
+package es.uniovi.notaineitor.controllers;
 
-import es.uniovi.noteneitor.entities.User;
-import es.uniovi.noteneitor.services.SecurityService;
-import es.uniovi.noteneitor.services.UserService;
+import es.uniovi.notaineitor.entities.User;
+import es.uniovi.notaineitor.services.SecurityService;
+import es.uniovi.notaineitor.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -71,13 +71,11 @@ public class UserController {
         securityService.autoLogin(user.getDni(), user.getRepeatPassword());
         return "redirect:home";
     }
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
-
-    @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
     public String home(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String dni = auth.getName();
@@ -85,7 +83,5 @@ public class UserController {
         model.addAttribute("markList", activeUser.getMarks());
         return "home";
     }
-
-
 
 }

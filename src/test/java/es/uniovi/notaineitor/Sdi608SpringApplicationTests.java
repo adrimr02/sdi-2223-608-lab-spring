@@ -1,4 +1,4 @@
-package es.uniovi.noteneitor;
+package es.uniovi.notaineitor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

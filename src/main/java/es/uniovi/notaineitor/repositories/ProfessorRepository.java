@@ -1,7 +1,6 @@
-package es.uniovi.noteneitor.repositories;
+package es.uniovi.notaineitor.repositories;
 
-import es.uniovi.noteneitor.entities.Mark;
-import es.uniovi.noteneitor.entities.Professor;
+import es.uniovi.notaineitor.entities.Professor;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ProfessorRepository extends CrudRepository<Professor, Long> {
