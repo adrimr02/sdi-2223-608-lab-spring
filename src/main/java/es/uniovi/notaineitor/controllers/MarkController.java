@@ -9,24 +9,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class MarkController {
 
     @Autowired
     private MarkService marksService;
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HttpSession httpSession;
 
     @Autowired
     private MarkFormValidator markFormValidator;
 
     @RequestMapping("/mark/list")
     public String getList(Model model) {
+        Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
+        if (consultedList == null)
+            consultedList = new HashSet<>();
+
+        model.addAttribute("consultedList", consultedList);
         model.addAttribute("markList", marksService.getMarks());
         return "mark/list";
     }
