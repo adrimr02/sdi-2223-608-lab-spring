@@ -1,6 +1,7 @@
 package es.uniovi.notaineitor.controllers;
 
 import es.uniovi.notaineitor.entities.User;
+import es.uniovi.notaineitor.services.RolesService;
 import es.uniovi.notaineitor.services.SecurityService;
 import es.uniovi.notaineitor.services.UserService;
 import es.uniovi.notaineitor.validators.SignUpFormValidator;
@@ -28,6 +29,8 @@ public class UserController {
     @Autowired
     private SignUpFormValidator signUpFormValidator;
 
+    @Autowired
+    private RolesService rolesService;
 
     @RequestMapping("/user/list")
     public String getListado(Model model) {
@@ -44,6 +47,7 @@ public class UserController {
     @RequestMapping(value = "/user/add")
     public String getUser(Model model) {
         model.addAttribute("usersList", userService.getUsers());
+        model.addAttribute("rolesList", rolesService.getRoles());
         return "user/add";
     }
 
@@ -96,6 +100,7 @@ public class UserController {
             return "signup";
         }
 
+        user.setRole(rolesService.getRoles()[0]);
         userService.addUser(user);
         securityService.autoLogin(user.getDni(), user.getRepeatPassword());
         return "redirect:home";

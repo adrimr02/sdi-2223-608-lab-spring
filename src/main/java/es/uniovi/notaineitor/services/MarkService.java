@@ -30,14 +30,7 @@ public class MarkService {
         return marks;
     }
     public Mark getMark(Long id) {
-        Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
-        if (consultedList == null)
-            consultedList = new HashSet<>();
-
-        Mark obtainedMark = marksRepository.findById(id).get();
-        consultedList.add(obtainedMark);
-        httpSession.setAttribute("consultedList", consultedList);
-        return obtainedMark;
+        return marksRepository.findById(id).get();
     }
     public void addMark(Mark mark) {
        marksRepository.save(mark);

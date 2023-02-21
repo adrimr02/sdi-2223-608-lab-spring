@@ -61,7 +61,7 @@ public class Mark {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mark mark = (Mark) o;
-        return id.equals(mark.id);
+        return Objects.equals(this.id, mark.id);
     }
 
     @Override
