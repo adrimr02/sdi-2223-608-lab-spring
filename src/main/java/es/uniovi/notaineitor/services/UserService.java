@@ -35,10 +35,6 @@ public class UserService {
         return usersRepository.findByDni(dni);
     }
 
-    public User getUserById(long id) {
-            return usersRepository.findById(id).get();
-        }
-
     public void deleteUser(Long id) {
         usersRepository.deleteById(id);
     }

@@ -74,7 +74,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/edit", method = RequestMethod.POST)
     public String setEdit(@ModelAttribute User newUser) {
-        var user = userService.getUserById(newUser.getId());
+        var user = userService.getUser(newUser.getId());
         user.setDni(newUser.getDni());
         user.setName(newUser.getName());
         user.setLastname(newUser.getLastname());
@@ -89,10 +89,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signup(@Validated User user, BindingResult result) {
+    public String signup(@Validated User user, BindingResult result, Model model) {
         signUpFormValidator.validate(user, result);
-        if (result.hasErrors())
+        if (result.hasErrors()) {
+            model.addAttribute("user", user);
             return "signup";
+        }
 
         userService.addUser(user);
         securityService.autoLogin(user.getDni(), user.getRepeatPassword());

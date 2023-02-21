@@ -3,9 +3,12 @@ package es.uniovi.notaineitor.controllers;
 import es.uniovi.notaineitor.entities.Mark;
 import es.uniovi.notaineitor.services.MarkService;
 import es.uniovi.notaineitor.services.UserService;
+import es.uniovi.notaineitor.validators.MarkFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +22,9 @@ public class MarkController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MarkFormValidator markFormValidator;
+
     @RequestMapping("/mark/list")
     public String getList(Model model) {
         model.addAttribute("markList", marksService.getMarks());
@@ -28,11 +34,19 @@ public class MarkController {
     @RequestMapping("/mark/add")
     public String getMark(Model model) {
         model.addAttribute("userList", userService.getUsers());
+        model.addAttribute("mark", new Mark());
         return "mark/add";
     }
 
     @RequestMapping(value = "/mark/add", method = RequestMethod.POST)
-    public String setMark(@ModelAttribute Mark mark) {
+    public String setMark(@Validated Mark mark, BindingResult result, Model model) {
+        markFormValidator.validate(mark, result);
+        if (result.hasErrors()) {
+            model.addAttribute("userList", userService.getUsers());
+            model.addAttribute("mark", mark);
+            return "mark/add";
+        }
+
         marksService.addMark(mark);
         return "redirect:/mark/list";
     }
@@ -52,12 +66,17 @@ public class MarkController {
     @RequestMapping(value = "/mark/edit/{id}")
     public String getEdit(Model model, @PathVariable Long id) {
         model.addAttribute("mark", marksService.getMark(id));
-        model.addAttribute("userList", userService.getUsers());
         return "mark/edit";
     }
 
     @RequestMapping(value="/mark/edit/{id}", method=RequestMethod.POST)
-    public String setEdit(@ModelAttribute Mark mark, @PathVariable Long id){
+    public String setEdit(@Validated Mark mark, @PathVariable Long id, BindingResult result, Model model){
+        markFormValidator.validate(mark, result);
+        if (result.hasErrors()) {
+            model.addAttribute("mark", mark);
+            return "mark/edit";
+        }
+
         Mark originalMark = marksService.getMark(id);
         originalMark.setScore(mark.getScore());
         originalMark.setDescription(mark.getDescription());
