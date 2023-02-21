@@ -7,35 +7,30 @@
   <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link" href="/home">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home" th:text="#{nav.home}">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="marksDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false"> Gestión de notas
-        </a>
+           aria-haspopup="true" aria-expanded="false" th:text="#{nav.marks}"></a>
         <div class="dropdown-menu" aria-labelledby="marksDropdown">
-          <a class="dropdown-item" href="/mark/list">Ver Notas</a>
-          <a class="dropdown-item" href="/mark/add">Agregar Nota</a>
-          <!--<div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/mark/filter">Filtrar</a>-->
+          <a class="dropdown-item" href="/mark/list" th:text="#{nav.marks.list}"></a>
+          <a class="dropdown-item" href="/mark/add" th:text="#{nav.marks.new}"></a>
         </div>
       </li>
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="usersDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false"> Gestión de usuarios
-        </a>
+           aria-haspopup="true" aria-expanded="false" th:text="#{nav.users}"></a>
         <div class="dropdown-menu" aria-labelledby="usersDropdown">
-          <a class="dropdown-item" href="/user/list">Ver Usuarios</a>
-          <a class="dropdown-item" href="/user/add">Agregar Usuario</a>
+          <a class="dropdown-item" href="/user/list" th:text="#{nav.users.list}"></a>
+          <a class="dropdown-item" href="/user/add" th:text="#{nav.users.new}"></a>
         </div>
       </li>
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="professorDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false"> Gestión de profesores
-        </a>
+           aria-haspopup="true" aria-expanded="false" th:text="#{nav.professors}"></a>
         <div class="dropdown-menu" aria-labelledby="professorDropdown">
-          <a class="dropdown-item" href="/professor/list">Ver Profesores</a>
-          <a class="dropdown-item" href="/professor/add">Agregar Profesor</a>
+          <a class="dropdown-item" href="/professor/list" th:text="#{nav.professors.list}"></a>
+          <a class="dropdown-item" href="/professor/add" th:text="#{nav.professors.new}"></a>
         </div>
       </li>
     </ul>
