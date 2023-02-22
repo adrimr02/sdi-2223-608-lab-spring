@@ -98,4 +98,16 @@ public class MarkController {
         return "mark/list::tableMarks";
     }
 
+    @RequestMapping("/mark/{id}/resend")
+    public String setResendTrue(@PathVariable Long id) {
+        marksService.setMarkResend(true, id);
+        return "redirect:/mark/list";
+    }
+
+    @RequestMapping("/mark/{id}/noresend")
+    public String setResendFalse(@PathVariable Long id) {
+        marksService.setMarkResend(false, id);
+        return "redirect:/mark/list";
+    }
+
 }
