@@ -19,8 +19,7 @@ public class Mark {
     @JoinColumn(name="user_id")
     private User user;
 
-    public Mark() {
-    }
+    public Mark() {}
 
     public Mark(String description, Double score, User user) {
         this.description = description;
@@ -69,11 +68,11 @@ public class Mark {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mark mark = (Mark) o;
-        return Objects.equals(this.id, mark.id);
+        return Objects.equals(id, mark.id) && Objects.equals(description, mark.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, description);
     }
 }

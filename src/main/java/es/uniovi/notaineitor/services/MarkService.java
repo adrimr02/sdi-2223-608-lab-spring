@@ -1,6 +1,7 @@
 package es.uniovi.notaineitor.services;
 
 import es.uniovi.notaineitor.entities.Mark;
+import es.uniovi.notaineitor.entities.User;
 import es.uniovi.notaineitor.repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -48,6 +49,17 @@ public class MarkService {
         if (mark.getUser().getDni().equals(dni))
             marksRepository.updateResend(revised, id);
 
+    }
+
+    public List<Mark> getMarksForUser(User user) {
+        List<Mark> marks = new ArrayList<>();
+        if (user.getRole().equals("ROLE_STUDENT"))
+            marks = marksRepository.findAllByUser(user);
+
+        if (user.getRole().equals("ROLE_PROFESSOR"))
+            marks = getMarks();
+
+        return marks;
     }
 
 }

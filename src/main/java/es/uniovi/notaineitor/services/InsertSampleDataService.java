@@ -2,6 +2,7 @@ package es.uniovi.notaineitor.services;
 
 import es.uniovi.notaineitor.entities.Mark;
 import es.uniovi.notaineitor.entities.User;
+import es.uniovi.notaineitor.repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class InsertSampleDataService {
         user6.setPassword("123456");
         user6.setRole(rolesService.getRoles()[2]);
 
-        Set user1Marks = new HashSet<Mark>() {
+        Set<Mark> user1Marks = new HashSet<>() {
             {
                 add(new Mark("Nota A1", 10.0, user1));
                 add(new Mark("Nota A2", 9.0, user1));
@@ -48,7 +49,8 @@ public class InsertSampleDataService {
             }
         };
         user1.setMarks(user1Marks);
-        Set user2Marks = new HashSet<Mark>() {
+
+        Set<Mark> user2Marks = new HashSet<>() {
             {
                 add(new Mark("Nota B1", 5.0, user2));
                 add(new Mark("Nota B2", 4.3, user2));
@@ -57,7 +59,7 @@ public class InsertSampleDataService {
             }
         };
         user2.setMarks(user2Marks);
-        Set user3Marks = new HashSet<Mark>() {
+        Set<Mark> user3Marks = new HashSet<>() {
             {
                 add(new Mark("Nota C1", 5.5, user3));
                 add(new Mark("Nota C2", 6.6, user3));
@@ -66,7 +68,7 @@ public class InsertSampleDataService {
         };
         user3.setMarks(user3Marks);
 
-        Set user4Marks = new HashSet<Mark>() {
+        Set<Mark> user4Marks = new HashSet<>() {
             {
                 add(new Mark("Nota D1", 10.0, user4));
                 add(new Mark("Nota D2", 8.0, user4));
@@ -74,6 +76,7 @@ public class InsertSampleDataService {
             }
         };
         user4.setMarks(user4Marks);
+
         userService.addUser(user1);
         userService.addUser(user2);
         userService.addUser(user3);
