@@ -19,13 +19,6 @@ public class MarkService {
     @Autowired
     private MarkRepository marksRepository;
 
-    private HttpSession httpSession;
-
-    @Autowired
-    public MarkService(HttpSession httpSession) {
-        this.httpSession = httpSession;
-    }
-
     public List<Mark> getMarks() {
         List<Mark> marks = new ArrayList<>();
         marksRepository.findAll().forEach(marks::add);
@@ -58,6 +51,18 @@ public class MarkService {
 
         if (user.getRole().equals("ROLE_PROFESSOR"))
             marks = getMarks();
+
+        return marks;
+    }
+
+    public List<Mark> searchMarksByDescriptionAndNameForUser(String query, User user) {
+        List<Mark> marks = new ArrayList<>();
+        query = "%"+query+"%";
+        if (user.getRole().equals("ROLE_STUDENT"))
+            marks = marksRepository.searchByDescriptionNameAndUser(query, user);
+
+        if (user.getRole().equals("ROLE_PROFESSOR"))
+            marks = marksRepository.searchByDescriptionAndName(query);
 
         return marks;
     }
