@@ -19,7 +19,7 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<User> getUsers() {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         usersRepository.findAll().forEach(users::add);
         return users;
     }

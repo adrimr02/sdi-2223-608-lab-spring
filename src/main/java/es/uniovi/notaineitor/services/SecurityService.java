@@ -35,9 +35,10 @@ public class SecurityService {
         var aToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
         authenticationManager.authenticate(aToken);
-        if (aToken.isAuthenticated())
+        if (aToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(aToken);
             logger.debug(String.format("Auto login %s successfully", dni));
+        }
     }
 
 }

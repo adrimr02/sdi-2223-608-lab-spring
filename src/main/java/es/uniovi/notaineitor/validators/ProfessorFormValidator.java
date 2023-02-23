@@ -1,7 +1,6 @@
 package es.uniovi.notaineitor.validators;
 
 import es.uniovi.notaineitor.entities.Professor;
-import es.uniovi.notaineitor.entities.User;
 import es.uniovi.notaineitor.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

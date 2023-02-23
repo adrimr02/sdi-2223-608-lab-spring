@@ -2,11 +2,9 @@ package es.uniovi.notaineitor.services;
 
 import es.uniovi.notaineitor.entities.Mark;
 import es.uniovi.notaineitor.entities.User;
-import es.uniovi.notaineitor.repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 

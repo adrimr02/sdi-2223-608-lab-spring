@@ -4,14 +4,13 @@ import es.uniovi.notaineitor.entities.Mark;
 import es.uniovi.notaineitor.entities.User;
 import es.uniovi.notaineitor.repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MarkService {
@@ -19,10 +18,8 @@ public class MarkService {
     @Autowired
     private MarkRepository marksRepository;
 
-    public List<Mark> getMarks() {
-        List<Mark> marks = new ArrayList<>();
-        marksRepository.findAll().forEach(marks::add);
-        return marks;
+    public Page<Mark> getMarks(Pageable pageable) {
+        return marksRepository.findAll(pageable);
     }
     public Mark getMark(Long id) {
         return marksRepository.findById(id).get();
@@ -44,25 +41,25 @@ public class MarkService {
 
     }
 
-    public List<Mark> getMarksForUser(User user) {
-        List<Mark> marks = new ArrayList<>();
+    public Page<Mark> getMarksForUser(Pageable pageable, User user) {
+        Page<Mark> marks = new PageImpl<>(new LinkedList<>());
         if (user.getRole().equals("ROLE_STUDENT"))
-            marks = marksRepository.findAllByUser(user);
+            marks = marksRepository.findAllByUser(pageable, user);
 
         if (user.getRole().equals("ROLE_PROFESSOR"))
-            marks = getMarks();
+            marks = getMarks(pageable);
 
         return marks;
     }
 
-    public List<Mark> searchMarksByDescriptionAndNameForUser(String query, User user) {
-        List<Mark> marks = new ArrayList<>();
+    public Page<Mark> searchMarksByDescriptionAndNameForUser(Pageable pageable, String query, User user) {
+        Page<Mark> marks = new PageImpl<>(new LinkedList<>());
         query = "%"+query+"%";
         if (user.getRole().equals("ROLE_STUDENT"))
-            marks = marksRepository.searchByDescriptionNameAndUser(query, user);
+            marks = marksRepository.searchByDescriptionNameAndUser(pageable, query, user);
 
         if (user.getRole().equals("ROLE_PROFESSOR"))
-            marks = marksRepository.searchByDescriptionAndName(query);
+            marks = marksRepository.searchByDescriptionAndName(pageable, query);
 
         return marks;
     }
