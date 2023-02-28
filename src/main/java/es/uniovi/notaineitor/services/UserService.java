@@ -3,10 +3,14 @@ package es.uniovi.notaineitor.services;
 import es.uniovi.notaineitor.entities.User;
 import es.uniovi.notaineitor.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -23,6 +27,16 @@ public class UserService {
         usersRepository.findAll().forEach(users::add);
         return users;
     }
+
+    public Page<User> getUsersPage(Pageable pageable) {
+        return usersRepository.getPagedUsers(pageable);
+    }
+
+    public Page<User> getUsersByNameAndSurname(Pageable pageable, String query) {
+        query = "%"+query+"%";
+        return usersRepository.searchByNameAndSurname(pageable, query);
+    }
+
     public User getUser(Long id) {
         return usersRepository.findById(id).get();
     }
