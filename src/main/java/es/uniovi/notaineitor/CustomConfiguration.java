@@ -1,8 +1,11 @@
 package es.uniovi.notaineitor;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -16,6 +19,12 @@ import java.util.Locale;
 
 @Configuration
 public class CustomConfiguration implements WebMvcConfigurer {
+
+    @Value( "${spring.data.web.pageable.default-page-size}" )
+    private int pageSize;
+
+    @Value( "${spring.data.web.pageable.page-parameter}" )
+    private String paramName;
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -38,10 +47,9 @@ public class CustomConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        int page = 0;
-        int size = 5;
         PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
-        resolver.setFallbackPageable(PageRequest.of(page, size));
+        resolver.setFallbackPageable(PageRequest.of(0, pageSize));
+        resolver.setPageParameterName(paramName);
         argumentResolvers.add(resolver);
 
     }
