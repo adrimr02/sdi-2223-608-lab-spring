@@ -27,7 +27,7 @@ public class ProfessorFormValidator implements Validator {
             errors.rejectValue("dni", "Error.signup.dni.length");}
 
         if (professorService.getProfessorByDni(professor.getDni()) != null) {
-            errors.rejectValue("dni", "Error.signup.dni.duplicate");}
+            errors.rejectValue("dni", "Er   ror.signup.dni.duplicate");}
         if (professor.getName().length() < 5 || professor.getName().length() > 24) {
             errors.rejectValue("name", "Error.signup.name.length");}
         if (professor.getLastname().length() < 5 || professor.getLastname().length() > 24) {

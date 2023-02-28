@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extrasspringsecurity4"
+>
 <head th:replace="fragments/head"></head>
 <body>
   <nav th:replace="fragments/nav"></nav>
@@ -25,14 +29,14 @@
           <td th:text="${professor.name}"></td>
           <td th:text="${professor.lastname}"></td>
           <td th:text="${professor.category}"></td>
-          <td><a th:href="${'/professor/details/' + professor.dni}">detalles</a></td>
-          <td><a th:href="${'/professor/edit/' + professor.dni}">modificar</a></td>
-          <td><a th:href="${'/professor/delete/' + professor.dni}">eliminar</a></td>
+          <td><a th:href="${'/professor/details/' + professor.id}"sec:authorize="hasAnyRole('ROLE_PROFESSOR','ROLE_ADMIN')">Detalles</a></td>
+          <td><a th:href="${'/professor/edit/' + professor.id}" sec:authorize="hasRole('ROLE_ADMIN')">Modificar</a></td>
+          <td><a th:href="${'/professor/delete/' + professor.id }" sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</a></td>
         </tr>
         </tbody>
       </table>
     </div>
-    <div th:if="${#lists.isEmpty(markList)}"> No hay profesores </div>
+    <div th:if="${#lists.isEmpty(professorList)}"> No hay profesores </div>
   </div>
   <footer th:replace="fragments/footer"></footer>
 </body>
