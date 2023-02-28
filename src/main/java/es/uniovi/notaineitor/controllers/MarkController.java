@@ -50,7 +50,7 @@ public class MarkController {
         String dni = principal.getName();
         var user = userService.getUserByDni(dni);
         model.addAttribute("markList", marksService.getMarksForUser(pageable, user).getContent());
-        return "mark/list::tableMarks";
+        return "fragments/markList";
     }
 
     @RequestMapping("/mark/add")
