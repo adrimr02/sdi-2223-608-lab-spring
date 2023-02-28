@@ -4,6 +4,7 @@ import es.uniovi.notaineitor.entities.Professor;
 import es.uniovi.notaineitor.services.ProfessorService;
 import es.uniovi.notaineitor.validators.ProfessorFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +24,10 @@ public class ProfessorController {
     private ProfessorFormValidator professorFormValidator;
 
     @RequestMapping("/professor/list")
-    public String getProfessors(Model model) {
-        model.addAttribute("professorList", professorService.getProfessors());
+    public String getProfessors(Model model, Pageable pageable) {
+        var professors = professorService.getPagedProfessors(pageable);
+        model.addAttribute("professorList", professors.getContent());
+        model.addAttribute("page", professors);
         return "professor/list";
     }
 

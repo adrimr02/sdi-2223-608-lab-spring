@@ -28,7 +28,7 @@ public class UserService {
         return users;
     }
 
-    public Page<User> getUsersPage(Pageable pageable) {
+    public Page<User> getPagedUsers(Pageable pageable) {
         return usersRepository.getPagedUsers(pageable);
     }
 

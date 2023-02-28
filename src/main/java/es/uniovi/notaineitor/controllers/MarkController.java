@@ -42,14 +42,21 @@ public class MarkController {
 
         model.addAttribute("markList", marks.getContent());
         model.addAttribute("page", marks);
+        model.addAttribute("searchText", searchText);
         return "mark/list";
     }
 
     @RequestMapping("/mark/list/update")
-    public String updateList(Model model, Pageable pageable, Principal principal) {
+    public String updateList(Model model, Pageable pageable, Principal principal, @RequestParam(required = false) String searchText) {
         String dni = principal.getName();
         var user = userService.getUserByDni(dni);
-        model.addAttribute("markList", marksService.getMarksForUser(pageable, user).getContent());
+        Page<Mark> marks;
+        if (searchText != null && !searchText.isBlank())
+            marks = marksService.searchMarksByDescriptionAndNameForUser(pageable, searchText, user);
+        else
+            marks = marksService.getMarksForUser(pageable, user);
+        model.addAttribute("markList", marks.getContent());
+        model.addAttribute("searchText", searchText);
         return "fragments/markList";
     }
 

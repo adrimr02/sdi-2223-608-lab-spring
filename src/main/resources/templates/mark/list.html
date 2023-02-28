@@ -19,13 +19,17 @@
     <button type="button" id="updateButton" class="btn btn-primary">Actualizar</button>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        $( "#updateButton" ).click(function() {
-            let numberPage = [[${param.page}]];
-            let urlUpdate = '/mark/list/update';
-            if (numberPage){
-                urlUpdate += "?page="+numberPage[0];
-            }
-            $("#tableMarks").load(urlUpdate);
+        $( "#updateButton").click(function() {
+          let urlUpdate = '/mark/list/update';
+          let numberPage = [[${param.page}]];
+          let searchText = [[${param.searchText}]];
+          if ( searchText ) {
+            urlUpdate += `?searchText=${searchText}`;
+          }
+          if ( numberPage ){
+            urlUpdate += `${searchText ? '&' : '?'}pagina=${numberPage[0]}`;
+          }
+          $("#tableMarks").load(urlUpdate);
         });
         /*]]>*/
     </script>

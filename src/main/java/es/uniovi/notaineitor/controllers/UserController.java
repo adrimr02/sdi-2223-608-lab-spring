@@ -39,15 +39,23 @@ public class UserController {
         if (searchText != null && !searchText.isBlank())
             users = userService.getUsersByNameAndSurname(pageable, searchText);
         else
-            users = userService.getUsersPage(pageable);
+            users = userService.getPagedUsers(pageable);
         model.addAttribute("usersList", users.getContent());
         model.addAttribute("page", users);
+        model.addAttribute("searchText", searchText);
         return "user/list";
     }
 
     @RequestMapping("/user/list/update")
-    public String updateList(Model model) {
-        model.addAttribute("usersList", userService.getUsers());
+    public String updateList(Pageable pageable, Model model, @RequestParam(required = false) String searchText) {
+        Page<User> users;
+        if (searchText != null && !searchText.isBlank())
+            users = userService.getUsersByNameAndSurname(pageable, searchText);
+        else
+            users = userService.getPagedUsers(pageable);
+        model.addAttribute("usersList", users.getContent());
+        model.addAttribute("page", users);
+        model.addAttribute("searchText", searchText);
         return "user/list::tableUsers";
     }
 
