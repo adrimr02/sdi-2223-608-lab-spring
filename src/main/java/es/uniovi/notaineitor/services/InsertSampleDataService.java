@@ -5,6 +5,7 @@ import es.uniovi.notaineitor.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class InsertSampleDataService {
     @Autowired
     private RolesService rolesService;
 
-    //@PostConstruct
+    @PostConstruct
     public void init() {
         User user1 = new User("99999990A", "Pedro", "Díaz");
         user1.setPassword("123456");

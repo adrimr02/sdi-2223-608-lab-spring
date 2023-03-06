@@ -1,9 +1,6 @@
 package es.uniovi.notaineitor;
 
-import es.uniovi.notaineitor.pageobjects.PO_HomeView;
-import es.uniovi.notaineitor.pageobjects.PO_Properties;
-import es.uniovi.notaineitor.pageobjects.PO_SignUpView;
-import es.uniovi.notaineitor.pageobjects.PO_View;
+import es.uniovi.notaineitor.pageobjects.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import java.util.List;
 
-@SpringBootTest(webEnvironment=WebEnvironment.MOCK)
+@SpringBootTest
 @TestMethodOrder( MethodOrderer.OrderAnnotation.class )
 class NotaneitorApplicationTests {
     static String PathFirefox = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
@@ -120,15 +117,15 @@ class NotaneitorApplicationTests {
         Assertions.assertEquals(checkText , result.get(0).getText());
     }
     // PR06B. Prueba del formulario de registro. Apellido corto.
-    // Propiedad: Error.signup.lastName.length
+    // Propiedad: Error.signup.lastname.length
     @Test
     @Order(9)
     public void PR06C() {
         PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
         PO_SignUpView.fillForm(driver, "99999990B", "Josefo", "Pere", "77777", "77777");
-        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.lastName.length",
+        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.lastname.length",
                 PO_Properties.getSPANISH() );
-        String checkText = PO_HomeView.getP().getString("Error.signup.lastName.length",
+        String checkText = PO_HomeView.getP().getString("Error.signup.lastname.length",
                 PO_Properties.getSPANISH());
         Assertions.assertEquals(checkText , result.get(0).getText());
     }
@@ -147,15 +144,15 @@ class NotaneitorApplicationTests {
     }
 
     // PR06B. Prueba del formulario de registro. Contraseña repetida.
-    // Propiedad: Error.signup.passwordConfirm.coincidence
+    // Propiedad: Error.signup.repeatPassword.coincidence
     @Test
     @Order(11)
     public void PR0E() {
         PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
         PO_SignUpView.fillForm(driver, "99999990B", "Josefo", "Perez", "77777", "77778");
-        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.passwordConfirm.coincidence",
+        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.repeatPassword.coincidence",
                 PO_Properties.getSPANISH() );
-        String checkText = PO_HomeView.getP().getString("Error.signup.passwordConfirm.coincidence",
+        String checkText = PO_HomeView.getP().getString("Error.signup.repeatPassword.coincidence",
                 PO_Properties.getSPANISH());
         Assertions.assertEquals(checkText , result.get(0).getText());
     }
@@ -172,6 +169,73 @@ class NotaneitorApplicationTests {
         String checkText = PO_HomeView.getP().getString("Error.signup.dni.length",
                 PO_Properties.getSPANISH());
         Assertions.assertEquals(checkText , result.get(0).getText());
+    }
+
+    @Test
+    @Order(13)
+    public void PR07() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999990A", "123456");
+        //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(14)
+    public void PR08() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999977E", "123456");
+        //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(15)
+    public void PR09() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999988F", "123456");
+        //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(16)
+    public void PR10() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999990A", "1234567");
+        //Comprobamos que seguimos en la pagina de login
+        String checkText = "Identifícate";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(17)
+    public void PR11() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999990A", "123456");
+        //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+        //Desconexion del usuario
+        PO_NavView.clickOption( driver, "logout", "class", "btn btn-primary");
     }
 
     //Después de cada prueba se borran las cookies del navegador
